@@ -17,11 +17,11 @@ try:
         content = file.read()
 except FileNotFoundError:
     print("File not found.")
-    sys.exit()  # This will terminate the program
+    sys.exit() 
 
 except Exception as e:
     print("An error occurred", e)
-    sys.exit()  # This will terminate the program
+    sys.exit() 
 
 # Create a mapping to/from characters and integers  
 words = content.split()
@@ -47,8 +47,7 @@ xs = torch.tensor(xs)
 ys = torch.tensor(ys)
 
 # Train neural net
-g = torch.Generator().manual_seed(2147483647)
-W = torch.randn((27,27), generator=g, requires_grad=True)
+W = torch.randn((27,27), requires_grad=True)
 
 num = len(xs)
 loss_val = 0
@@ -67,10 +66,9 @@ for _ in tqdm.tqdm(range(1000), desc="Processing", ncols=100):
     W.grad = None 
     loss.backward()
     W.data += -10 * W.grad
-print(loss_val)
 
 # Creating names with the neural net 
-print("Newly created names based off of ")
+print("\nNewly created names based off of INSERTFILE.txt:")
 for i in range(20):
     ix = 0
     out = []
@@ -80,7 +78,7 @@ for i in range(20):
         logits = xenc @ W
         counts = logits.exp()
         probs = counts / counts.sum(1, keepdims=True)
-        ix = torch.multinomial(probs, num_samples=1, replacement=True, generator=g).item()
+        ix = torch.multinomial(probs, num_samples=1, replacement=True).item()
         out.append(itos[ix])
         if ix == 0:
             break
