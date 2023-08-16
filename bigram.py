@@ -6,9 +6,18 @@ import random
 import tqdm
 import argparse 
 
-#parser = argparse.ArgumentParser(prog='Makemore', description='Takes an input of a list of words and outputs similar words')
+parser = argparse.ArgumentParser(prog='Makemore', description='Takes an input of a list of words and outputs similar words')
+parser.add_argument("filename")
+t = parser.add_argument('-n', '--training_iterations', type=int, default=1000, metavar="[100-10,000]", help="Sets the number of NN training iterations")
 
-file_path = sys.argv[1]
+args = parser.parse_args()
+file_path = args.filename
+training_iterations = args.training_iterations
+
+if training_iterations > 10000 or training_iterations < 1:
+    print("Error: Training iterations must be in range (1-10,000)")
+    sys.exit()
+
 content = ""
 
 # Read in the text file 
@@ -53,7 +62,7 @@ num = len(xs)
 loss_val = 0
 
 # Gradient descent 
-for _ in tqdm.tqdm(range(1000), desc="Processing", ncols=100):
+for _ in tqdm.tqdm(range(training_iterations), desc="Processing", ncols=100):
     # forward pass
     xenc = F.one_hot(xs, num_classes=27).float()
     logits = xenc @ W
@@ -68,7 +77,7 @@ for _ in tqdm.tqdm(range(1000), desc="Processing", ncols=100):
     W.data += -10 * W.grad
 
 # Creating names with the neural net 
-print("\nNewly created names based off of INSERTFILE.txt:")
+print(f"\nNewly created words based off of {file_path.split('/')[-1]} \n")
 for i in range(20):
     ix = 0
     out = []
