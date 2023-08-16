@@ -6,8 +6,8 @@ import tqdm
 import argparse 
 
 parser = argparse.ArgumentParser(prog='Makemore', description='Takes an input of a list of words and outputs similar words')
-parser.add_argument("-f", "--filename", type=str, default="names.txt")
-parser.add_argument('-n', '--training_iterations', type=int, default=1000, metavar="[100-10,000]", help="Sets the number of NN training iterations")
+parser.add_argument("-f", "--filename", type=str, default="names.txt", metavar="path/to/file", help="The file that contains the training data")
+parser.add_argument('-n', '--training_iterations', type=int, default=1000, metavar="[100-10,000]", help="Sets the number of NN training iterations for the selected model")
 parser.add_argument('-m', '--model', type=str, default="bigram", choices=['bigram', 'mlp'], metavar="[bigram, mlp, ]", help="Choose the NN model to use")
 
 args = parser.parse_args()
@@ -40,8 +40,8 @@ stoi = {s:i+1 for i, s in enumerate(chars)}
 stoi["."] = 0
 itos = {i:s for s, i in stoi.items()}
 
-# BIGRAM NEURAL NET 
 
+# BIGRAM NEURAL NET 
 def bigram_model():
 
     # Create training set 
@@ -95,3 +95,11 @@ def bigram_model():
             if ix == 0:
                 break
         print(''.join(out))  
+
+
+
+# Select the model 
+if model == 'bigram':
+    bigram_model()
+elif model == 'mlp':
+    pass
