@@ -7,7 +7,7 @@ import argparse
 
 parser = argparse.ArgumentParser(prog='Makemore', description='Takes an input of a list of words and outputs similar words')
 parser.add_argument("-f", "--filename", type=str, default="names.txt", metavar="path/to/file", help="The file that contains the training data")
-parser.add_argument('-n', '--training_iterations', type=int, default=1000, metavar=">0", help="Sets the number of NN training iterations for the selected model")
+parser.add_argument('-n', '--training_iterations', type=int, default=1000, metavar="> 0", help="Sets the number of NN training iterations for the selected model")
 parser.add_argument('-m', '--model', type=str, default="bigram", choices=['bigram', 'mlp'], metavar="[bigram, mlp, ]", help="Choose the NN model to use")
 parser.add_argument('-s', '--sample', type=int, default=20, metavar="int of output samples", help="Sets the amount of output samples")
 

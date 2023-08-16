@@ -1,4 +1,21 @@
-Makemore is a language model that takes in training data of lines of words and outputs words that are similar
+#Makemore is a language model that takes in training data of lines of words and outputs words that are similar
+
+### Usage
+The following is the most basic way to run the program 
+'python3 makemore.py'
+Which defaults to 
+'python3 makemore.py -f=names.txt -n=1000 -m=bigram -s=20'
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f path/to/file, --filename path/to/file
+                        The file that contains the training data
+  -n > 0, --training_iterations > 0
+                        Sets the number of NN training iterations for the selected model
+  -m [bigram, mlp, ], --model [bigram, mlp, ]
+                        Choose the NN model to use
+  -s int of output samples, --sample int of output samples
+                        Sets the amount of output samples
 
 - names.txt contains over 32,000 names. Used for training data.  
 
