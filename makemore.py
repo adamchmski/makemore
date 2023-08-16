@@ -178,7 +178,7 @@ def MLP():
 
 
 # Message before new words are outputted 
-print(f"\nNewly created words based off of {file_path.split('/')[-1]} \n")
+print(f"\nCreating words based off of {file_path.split('/')[-1]}...\n")
 
 # Select the model 
 if model == 'bigram':
