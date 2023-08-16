@@ -9,11 +9,13 @@ parser = argparse.ArgumentParser(prog='Makemore', description='Takes an input of
 parser.add_argument("-f", "--filename", type=str, default="names.txt", metavar="path/to/file", help="The file that contains the training data")
 parser.add_argument('-n', '--training_iterations', type=int, default=1000, metavar="[100-10,000]", help="Sets the number of NN training iterations for the selected model")
 parser.add_argument('-m', '--model', type=str, default="bigram", choices=['bigram', 'mlp'], metavar="[bigram, mlp, ]", help="Choose the NN model to use")
+parser.add_argument('-s', '--sample', type=int, default=20, metavar="int of output samples", help="Sets the amount of output samples")
 
 args = parser.parse_args()
 file_path = args.filename
 training_iterations = args.training_iterations
 model = args.model
+num_samples = args.sample
 
 if training_iterations > 10000 or training_iterations < 1:
     print("Error: Training iterations must be in range (1-10,000)")
@@ -81,7 +83,7 @@ def bigram_model():
 
     # Creating names with the neural net 
     print(f"\nNewly created words based off of {file_path.split('/')[-1]} \n")
-    for i in range(20):
+    for i in range(num_samples):
         ix = 0
         out = []
         
