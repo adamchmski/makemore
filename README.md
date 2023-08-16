@@ -1,5 +1,5 @@
 # Makemore 
-Makemore is a language model that takes in training data of lines of words and outputs words that are similar
+Makemore is a character level language model that takes in training data of lines of words and outputs words that are similar
 
 ### Usage
 The following is the most basic way to run the program 
